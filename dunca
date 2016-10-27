@@ -1,0 +1,14 @@
+#!bin/bash
+echo "nr de instuctiuni de mutare"
+echo  | grep -c 'mov' $1
+
+
+z=`grep -c 'add' $1`
+x=`grep -c 'sub' $1`
+c=`grep -c 'inc' $1`
+v=`grep -c 'dec' $1`
+b=`grep -c 'mul' $1`
+n=`grep -c 'imul' $1`
+
+echo "nr de instuctiuni de aritmetica"
+echo `expr $z + $x + $c + $v + $b + $n`
