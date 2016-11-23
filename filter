@@ -1,0 +1,20 @@
+#!bin/bash
+nr=`grep -Ev "^(\s*\.+.*)" $1 | grep -Ev "^\w*:" | grep -c '\w'` 
+sum=0
+echo "nr de intructiuni: $nr"
+
+nr_mov=`grep -Ev "^(\s*\.+.*)" $1 | grep -Ev "^\w*:" | grep -E "\s*(mov|pop|push).*" | grep -c '\w'`
+sum=`expr $sum + $nr_mov`
+echo "nr de instructiuni de mutare: $nr_mov"
+
+nr_aritm=`grep -Ev "^(\s*\.+.*)" $1 | grep -Ev "^\w*:" | grep -E "\s*(add|sub|inc|dec|mul|imul|cmp).*" | grep -c '\w'`
+sum=`expr $sum + $nr_aritm`
+echo "nr de instructiuni aritmetice: $nr_aritm"
+
+nr_jumps=`grep -Ev "^(\s*\.+.*)" $1 | grep -Ev "^\w*:" | grep -E "\s*(j|call|ret).*" | grep -c '\w'`
+sum=`expr $sum + $nr_jumps`
+echo "nr de instructiuni de jump: $nr_jumps"
+
+nr_others=`expr $nr - $sum`
+
+echo "nr de alte instructiuni: $nr_others"
